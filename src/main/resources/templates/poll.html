@@ -1,0 +1,20 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset='utf-8'>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Poll 投票</title>
+</head>
+<body>
+    <h1 th:text="${poll.question}"></h1>
+    <ul>
+        <li th:each="choice : ${poll.choices}">
+            <span th:text="${choice.text}">選択肢</span>
+            <span th:text="${choice.votes}">投票数</span>
+            <form th:action="@{/poll/{pollId}/vote/{choiceId}(pollId=${poll.id}, choiceId=${choice.id})}" method="post">
+                <button type="submit">投票</button>
+            </form>
+        </li>
+    </ul>
+    <a th:href="@{/}">投票内容の登録ページ</a>
+</body>
+</html>
